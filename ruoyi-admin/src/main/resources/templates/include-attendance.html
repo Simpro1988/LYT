@@ -1,0 +1,29 @@
+<!-- 通用CSS -->
+<html lang="zh" xmlns:th="http://thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:fragment=header(title)>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="description" content="">
+	<meta name="author" content="Okato, and Bootstrap contributors">
+	<meta name="generator" content="Hugo 0.83.1">
+	<title th:text="${title}"></title>
+	<link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
+
+	<link th:href="@{/simpro/lib/css/bootstrap.min.css}" rel="stylesheet"/>
+	<link th:href="@{/simpro/lib/css/timepicker.min.css}" rel="stylesheet"/>
+	<link th:href="@{/simpro/css/common.css}" rel="stylesheet"/>
+</head>
+
+<!-- 通用JS -->
+<div th:fragment="footer">
+    <script th:inline="javascript"> let ctx = [[@{/}]]; var lockscreen = [[${session.lockscreen}]]; if(lockscreen){window.top.location=ctx+"lockscreen";} </script>
+    <a id="scroll-up" href="#" class="btn btn-sm display"><i class="fa fa-angle-double-up"></i></a>
+	<script th:src="@{/simpro/lib/js/jquery.slim.min.js}"></script>
+	<script th:src="@{/simpro/lib/js/timepicker.js}"></script>
+	<script th:src="@{/simpro/lib/js/bootstrap.bundle.min.js}"></script>
+	<script type="module" th:src="@{/simpro/js/TimeSheetComponent.js}"></script>
+	<script type="module" th:src="@{/simpro/js/Codify.js}"></script>
+	<script th:src="@{/ajax/libs/layer/layer.min.js?v=20210516}"></script>
+	<script th:src="@{/ajax/libs/layui/layui.js?v=20210516}"></script>
+</div>
+

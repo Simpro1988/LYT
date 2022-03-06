@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysAttendanceDetailMapper">
+    
+    <resultMap type="SysAttendanceDetail" id="SysAttendanceDetailResult">
+        <result property="id"    column="id"    />
+        <result property="attendanceId"    column="attendance_id"    />
+        <result property="date"    column="date"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="breakTime"    column="break_time"    />
+        <result property="workTime"    column="work_time"    />
+        <result property="workOvertime"    column="work_overtime"    />
+        <result property="workContent"    column="work_content"    />
+        <result property="status"    column="status"    />
+        <result property="memo"    column="memo"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectSysAttendanceDetailVo">
+        select id, attendance_id, date, start_time, end_time, break_time, work_time, work_overtime, work_content, status, memo, create_time, update_time from sys_attendance_detail
+    </sql>
+
+    <select id="selectSysAttendanceDetailList" parameterType="String" resultMap="SysAttendanceDetailResult">
+        <include refid="selectSysAttendanceDetailVo"/>
+        <where>  
+            <if test="attendanceId != null "> and attendance_id = #{attendanceId}</if>
+        </where>
+        order by date
+    </select>
+    
+    <select id="selectSysAttendanceDetailById" parameterType="Long" resultMap="SysAttendanceDetailResult">
+        <include refid="selectSysAttendanceDetailVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSysAttendanceDetail" parameterType="SysAttendanceDetail" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_attendance_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="attendanceId != null">attendance_id,</if>
+            <if test="date != null and date != ''">date,</if>
+            <if test="startTime != null">start_time,</if>
+            <if test="endTime != null">end_time,</if>
+            <if test="breakTime != null">break_time,</if>
+            <if test="workTime != null">work_time,</if>
+            <if test="workOvertime != null">work_overtime,</if>
+            <if test="workContent != null">work_content,</if>
+            <if test="status != null">status,</if>
+            <if test="memo != null">memo,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="attendanceId != null">#{attendanceId},</if>
+            <if test="date != null and date != ''">#{date},</if>
+            <if test="startTime != null">#{startTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="breakTime != null">#{breakTime},</if>
+            <if test="workTime != null">#{workTime},</if>
+            <if test="workOvertime != null">#{workOvertime},</if>
+            <if test="workContent != null">#{workContent},</if>
+            <if test="status != null">#{status},</if>
+            <if test="memo != null">#{memo},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysAttendanceDetail" parameterType="SysAttendanceDetail">
+        update sys_attendance_detail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="attendanceId != null">attendance_id = #{attendanceId},</if>
+            <if test="date != null and date != ''">date = #{date},</if>
+            <if test="startTime != null">start_time = #{startTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="breakTime != null">break_time = #{breakTime},</if>
+            <if test="workTime != null">work_time = #{workTime},</if>
+            <if test="workOvertime != null">work_overtime = #{workOvertime},</if>
+            <if test="workContent != null">work_content = #{workContent},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="memo != null">memo = #{memo},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSysAttendanceDetailById" parameterType="Long">
+        delete from sys_attendance_detail where id = #{id}
+    </delete>
+
+    <delete id="deleteSysAttendanceDetailByIds" parameterType="String">
+        delete from sys_attendance_detail where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
